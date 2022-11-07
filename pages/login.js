@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { auth, signInWithEmailAndPassword } from "../firebaseConfig";
+import { auth, signInWithEmailAndPassword } from "../firebase";
 import { login } from "../store/reducers/userSlice";
 
 const Login = () => {

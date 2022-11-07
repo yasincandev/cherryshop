@@ -7,7 +7,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineSearch,
 } from "react-icons/ai";
-import { auth, signOut } from "../../firebaseConfig";
+import { auth, signOut } from "../../firebase";
 import { useSelector } from "react-redux";
 import Logout from "./Logout";
 

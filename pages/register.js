@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { auth, createUserWithEmailAndPassword } from "../firebaseConfig";
+import { auth, createUserWithEmailAndPassword } from "../firebase";
 import { register } from "../store/reducers/userSlice";
 const Register = () => {
   const [email, setEmail] = useState("");

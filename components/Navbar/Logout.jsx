@@ -2,7 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { AiOutlineLogout } from "react-icons/ai";
-import { auth, signOut } from "../../firebaseConfig";
+import { auth, signOut } from "../../firebase";
 
 export default function Logout({ user }) {
   const logout = () => {
