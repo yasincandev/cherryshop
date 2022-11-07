@@ -50,6 +50,7 @@
     <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
     <li><a href="https://redux.js.org/">Redux</a></li>
     <li><a href="https://redux-toolkit.js.org/"> Redux Toolkit</a></li>
+    <li><a href="https://swiperjs.com/"> Swiper</a></li>
 
   </ul>
 </details>
