@@ -66,6 +66,20 @@ const Register = () => {
               />
             </div>
             <div>
+              <label htmlFor='email-address' className='sr-only'>
+                Username
+              </label>
+              <input
+                type='text'
+                name='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder='Username'
+                autoComplete='name'
+                className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-[#E43038] mb-3 '
+              />
+            </div>
+            <div>
               <label htmlFor='password' className='sr-only'>
                 Password
               </label>
