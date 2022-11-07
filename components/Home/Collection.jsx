@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
@@ -30,13 +31,15 @@ const Collection = ({ womenProducts }) => {
         >
           {womenProducts.map((product) => (
             <SwiperSlide key={product.id}>
-              <Image
-                src={product.image}
-                alt=''
-                width={500}
-                height={100}
-                className=' object-contain w-full h-full'
-              />
+              <Link href={`/detail/${product.id}`}>
+                <Image
+                  src={product.image}
+                  alt=''
+                  width={500}
+                  height={100}
+                  className=' object-contain w-full h-full'
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

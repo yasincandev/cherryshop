@@ -18,10 +18,29 @@ import { productApi } from "./services/productApi";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import userSlice from "./reducers/userSlice";
 
+const createNoopStorage = () => {
+  return {
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  };
+};
+
+const storage =
+  typeof window === "undefined"
+    ? createNoopStorage()
+    : createWebStorage("local");
+
 const persistConfig = {
   key: "root",
   version: 1,
-  storage: createWebStorage("local"),
+  storage,
   whitelist: ["cart", "user"],
 };
 
