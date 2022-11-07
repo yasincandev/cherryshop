@@ -1,34 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+  <img src="./public/assets/logo.png" alt="logo" width="200" height="auto" />
+  <h1>Cherry Shop</h1>
+  
+  <p>
+    A simple e-commerce website built with Next, Redux, Firebase and Tailwind.
+  </p>
 
-First, run the development server:
+<h4>
+    <a href="https://cherry-shop.vercel.app/">View Demo</a>
+  <span> · </span>
+    <a href="https://github.com/yasincandev/cherryshop/issues/">Report Bug</a>
+  <span> · </span>
+    <a href="https://github.com/yasincandev/cherryshop/issues/">Request Feature</a>
+  </h4>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<br />
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- Table of Contents -->
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# :notebook_with_decorative_cover: Table of Contents
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- [:notebook_with_decorative_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
+  - [:star2: About the Project](#star2-about-the-project)
+    - [:space_invader: Tech Stack](#space_invader-tech-stack)
+    - [:dart: Features](#dart-features)
+  - [:warning: License](#warning-license)
+  - [:handshake: Contact](#handshake-contact)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<!-- About the Project -->
 
-## Learn More
+## :star2: About the Project
 
-To learn more about Next.js, take a look at the following resources:
+<div align="center"> 
+  <img src="https://i.ibb.co/r2C7mJN/ss.png" alt="screenshot" />
+</div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- TechStack -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### :space_invader: Tech Stack
 
-## Deploy on Vercel
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://www.typescriptlang.org/">Javascript</a></li>
+    <li><a href="https://nextjs.org/">Next.js</a></li>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
+    <li><a href="https://redux.js.org/">Redux</a></li>
+    <li><a href="https://redux-toolkit.js.org/"> Redux Toolkit</a></li>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  </ul>
+</details>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://firebase.google.com/">Firebase</a></li>
+  </ul>
+</details>
+
+<!-- Features -->
+
+### :dart: Features
+
+- Responsive Design
+- Authentication
+- Shopping Cart
+
+## :warning: License
+
+Distributed under the no License. See LICENSE.txt for more information.
+
+## :handshake: Contact
+
+Your Name - [@yasincandev](https://linkedin.com/in/yasincandev) - yasiican@outlook.com
+
+Demo: [https://cherry-shop.vercel.app/](https://cherry-shop.vercel.app/)
