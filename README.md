@@ -44,7 +44,7 @@
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://www.typescriptlang.org/">Javascript</a></li>
+    <li><a href="https://javascript.info/js">Javascript</a></li>
     <li><a href="https://nextjs.org/">Next.js</a></li>
     <li><a href="https://reactjs.org/">React.js</a></li>
     <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
@@ -75,6 +75,6 @@ Distributed under the no License. See LICENSE.txt for more information.
 
 ## :handshake: Contact
 
-Your Name - [@yasincandev](https://linkedin.com/in/yasincandev) - yasiican@outlook.com
+[@yasincandev](https://linkedin.com/in/yasincandev) - yasiican@outlook.com
 
 Demo: [https://cherry-shop.vercel.app/](https://cherry-shop.vercel.app/)
