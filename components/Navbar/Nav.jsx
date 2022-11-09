@@ -1,29 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import Logout from "./Logout";
 import {
   AiOutlineLogin,
   AiOutlineUser,
   AiOutlineShoppingCart,
   AiOutlineSearch,
 } from "react-icons/ai";
-import { auth, signOut } from "../../firebase";
 import { useSelector } from "react-redux";
-import Logout from "./Logout";
+import {
+  logoutUserThunk,
+  selectUser,
+  selectStatus,
+  selectError,
+  trackAuthState,
+} from "../../store/reducers/authSlice";
+import { useState } from "react";
 
 const Nav = () => {
-  const totalItemsInCart = useSelector((state) => state.cart.totalQuantity);
-  const { user } = useSelector((state) => state.user);
+  const cartItems = useSelector((state) => state.cart);
+  const user = useSelector(selectUser);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [isLogged, setIsLogged] = useState(false);
-
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  });
+  console.log("user", user);
 
   return (
     <nav className=' flex justify-between items-center mb-5  gap-4 '>
@@ -37,7 +36,20 @@ const Nav = () => {
         />
       </Link>
       <div className='hidden md:flex items-center'>
-        <AiOutlineSearch className='h-6 w-6 pt-0.5 text-[#E43038]' />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 pt-0.5 text-[#E43038]'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={3}
+            d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+          />
+        </svg>
         <input
           className='px-8 ml-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none items-center '
           type='text'
@@ -48,8 +60,8 @@ const Nav = () => {
       </div>
       <div className=' hidden md:flex items-center'>
         <ul className='flex items-center gap-3'>
-          {isLogged ? (
-            <Logout user={user} />
+          {user ? (
+            <Logout />
           ) : (
             <>
               <li className='font-semibold cursor-pointer flex items-center text-gray-700 hover:text-[#E43038]'>
@@ -81,9 +93,9 @@ const Nav = () => {
                 size={30}
                 className=' inline-block mr-1 text-xl '
               />
-              {totalItemsInCart > 0 && (
+              {cartItems.items.length > 0 && (
                 <span className='absolute bottom-4 left-5 bg-[#E43038] text-white rounded-full p-2 w-3 h-3 flex items-center justify-center text-xs'>
-                  {totalItemsInCart}
+                  {cartItems.items.length}
                 </span>
               )}
 

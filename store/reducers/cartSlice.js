@@ -4,70 +4,51 @@ const initialState = {
   items: [],
   totalQuantity: 0,
   totalPrice: 0,
-  changed: false,
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action) {
+    addToCart: (state, action) => {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++;
-      state.changed = true;
+      state.totalPrice += newItem.price;
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
-          title: newItem.title,
           price: newItem.price,
-          image: newItem.image,
-          size: newItem.size,
           quantity: 1,
+          totalPrice: newItem.price,
+          title: newItem.title,
+          image: newItem.image,
         });
-        state.totalPrice += newItem.price;
       } else {
         existingItem.quantity++;
-        state.totalPrice += existingItem.price;
+        existingItem.totalPrice += newItem.price;
       }
     },
-    removeFromCart(state, action) {
+    removeFromCart: (state, action) => {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
       state.totalQuantity--;
-      state.changed = true;
+      state.totalPrice -= existingItem.price;
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== id);
       } else {
         existingItem.quantity--;
+        existingItem.totalPrice -= existingItem.price;
       }
-      state.totalPrice -= existingItem.price;
     },
-    //when user clicks on minus or plus button in cart page this function will be called and it will update the quantity of the item in cart. If user clicks on minus button and quantity is 1 then it will remove the item from cart.
-    updateCart(state, action) {
-      const { id, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item.id === id);
-      state.totalQuantity += quantity - existingItem.quantity;
-      state.changed = true;
-      if (quantity === 0) {
-        state.items = state.items.filter((item) => item.id !== id);
-      } else {
-        existingItem.quantity = quantity;
-      }
-      state.totalPrice +=
-        (quantity - existingItem.quantity) * existingItem.price;
+    clearCart: (state) => {
+      state.items = [];
+      state.totalQuantity = 0;
+      state.totalPrice = 0;
     },
   },
 });
-export const {
-  addToCart,
-  removeFromCart,
-  updateCart,
-  updateTotalQuantity,
-  updateTotalAmount,
-  decrementQuantity,
-  incrementQuantity,
-  clearCart,
-} = cartSlice.actions;
+
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

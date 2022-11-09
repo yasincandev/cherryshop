@@ -1,25 +1,24 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { AiOutlineLogout } from "react-icons/ai";
-import { auth, signOut } from "../../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUserThunk, selectUser } from "../../store/reducers/authSlice";
 
-export default function Logout({ user }) {
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("Sign-out successful.");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+export default function Logout() {
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+
+  const logoutUser = () => {
+    dispatch(logoutUserThunk());
   };
 
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
         <Menu.Button className='inline-flex w-full justify-center rounded-md bg-[#E43038]  px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E43038] focus-visible:ring-opacity-75'>
-          {user.name}
+          {user.displayName}
           <ChevronDownIcon
             className='ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100'
             aria-hidden='true'
@@ -43,7 +42,7 @@ export default function Logout({ user }) {
                   className={`${
                     active ? "bg-[#E43038] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  onClick={logout}
+                  onClick={logoutUser}
                 >
                   <AiOutlineLogout
                     className='mr-2 h-5 w-5'
