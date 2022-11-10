@@ -22,8 +22,6 @@ const Nav = () => {
   const user = useSelector(selectUser);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("user", user);
-
   return (
     <nav className=' flex justify-between items-center mb-5  gap-4 '>
       <Link href='/'>
@@ -32,7 +30,7 @@ const Nav = () => {
           alt=''
           width={180}
           height={100}
-          className='w-32 md:w-48 lg:w-64   '
+          className='w-32 md:w-36 lg:w-44 rounded-full  '
         />
       </Link>
       <div className='hidden md:flex items-center'>

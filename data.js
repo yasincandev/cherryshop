@@ -45,7 +45,7 @@ const categories = [
   },
   {
     id: 3,
-    name: "MOTHER & CHILD",
+    name: " CHILDREN",
     dropdown: [
       {
         id: 1,
@@ -67,7 +67,7 @@ const categories = [
   },
   {
     id: 4,
-    name: "HOME & FURNITURE",
+    name: "HOME ",
     dropdown: [
       {
         id: 1,
@@ -133,7 +133,7 @@ const categories = [
   },
   {
     id: 7,
-    name: "SHOES & BAGS",
+    name: "SHOES&BAGS",
     dropdown: [
       {
         id: 1,
@@ -155,7 +155,7 @@ const categories = [
   },
   {
     id: 8,
-    name: "WATCHES & ACCESSORIES",
+    name: "ACCESSORIES",
     dropdown: [
       {
         id: 1,
@@ -193,13 +193,13 @@ const categories = [
       },
       {
         id: 4,
-        name: "Small Home Appliances",
+        name: "Home Appliances",
       },
     ],
   },
   {
     id: 10,
-    name: "SPORT&OUTDOOR",
+    name: "SPORT",
     dropdown: [
       {
         id: 1,

@@ -1,137 +1,204 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment, useEffect, useState } from "react";
+import {
+  Bars3Icon,
+  ChevronUpIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { categories } from "../../data";
-import { AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineLogout,
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+  AiOutlineUser,
+} from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { logoutUserThunk, selectUser } from "../../store/reducers/authSlice";
+import { Disclosure } from "@headlessui/react";
 
 const ResponsiveNavbar = () => {
-  return (
-    <Popover className='relative '>
-      <div className='mx-auto max-w-7xl px-4 sm:px-6'>
-        <div className='flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10'>
-          <div className='flex justify-start lg:w-0 lg:flex-1'>
-            <Link href='/'>
-              <Image
-                src='/assets/logo.png'
-                alt='logo'
-                width={150}
-                height={50}
-                className='cursor-pointer'
-              />
-            </Link>
-          </div>
-          <div className='-my-2 -mr-2 md:hidden'>
-            <Popover.Button className='inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
-              <span className='sr-only'>Open menu</span>
-              <Bars3Icon className='h-6 w-6' aria-hidden='true' />
-            </Popover.Button>
-          </div>
+  const cartItems = useSelector((state) => state.cart);
+  const user = useSelector(selectUser);
+  const [shadow, setShadow] = useState(false);
+  const [openNav, setOpenNav] = useState(false);
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+  console.log(user);
+  const dispatch = useDispatch();
 
-          <div className='hidden items-center justify-end md:flex md:flex-1 lg:w-0'>
-            <Link
-              href='/login'
-              className='whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900'
-            >
-              Sign in
-            </Link>
-            <Link
-              href='/register'
-              className='ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700'
-            >
-              Sign up
-            </Link>
+  const logoutUser = () => {
+    dispatch(logoutUserThunk());
+  };
+
+  const handleNav = () => {
+    setOpenNav(!openNav);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "nav") {
+      setOpenNav(false);
+    }
+  };
+
+  const toggleCategory = (e) => {
+    setOpenDropdown(!openDropdown);
+  };
+
+  const toggleSubCategory = (category) => {
+    setShowSubCategories(true);
+    setSelectedCategory(category);
+  };
+
+  useEffect(() => {
+    const handleShadow = () => {
+      if (window.scrollY >= 90) {
+        setShadow(true);
+      } else {
+        setShadow(false);
+      }
+    };
+    window.addEventListener("scroll", handleShadow);
+  }, []);
+
+  return (
+    <Fragment>
+      <div className='flex items-center justify-between px-4 py-2 bg-white shadow-md '>
+        <div className='flex items-center w-full justify-between'>
+          <Link href='/'>
+            <Image
+              src='/assets/logo.png'
+              alt='logo'
+              width={50}
+              height={50}
+              className='cursor-pointer rounded-full'
+            />
+          </Link>
+
+          <div onClick={handleNav} className='md:hidden text-gray-700'>
+            <Bars3Icon className='h-8 w-8' />
           </div>
         </div>
-      </div>
-
-      <Transition
-        as={Fragment}
-        enter='duration-200 ease-out'
-        enterFrom='opacity-0 scale-95'
-        enterTo='opacity-100 scale-100'
-        leave='duration-100 ease-in'
-        leaveFrom='opacity-100 scale-100'
-        leaveTo='opacity-0 scale-95'
-      >
-        <Popover.Panel
-          focus
-          className='absolute inset-x-0 top-0 origin-top-right z-10 transform p-2 transition md:hidden'
+        <div
+          onClick={handleOutsideClick}
+          id='nav'
+          className={
+            openNav
+              ? "md:hidden z-50 fixed left-0 top-0 w-full h-screen bg-black/70"
+              : "transition-all z-50 duration-300 ease-in-out "
+          }
         >
-          <div className='divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5'>
-            <div className='px-5 pt-5 pb-6'>
-              <div className='flex items-center justify-between'>
-                <div>
+          <div
+            className={
+              openNav
+                ? " fixed z-50 left-0 top-0 w-[85%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-6 ease-in duration-500"
+                : "fixed z-50 left-[-100%] top-0 p-6 ease-in duration-500"
+            }
+          >
+            <div>
+              <div className='flex w-full items-center justify-between'>
+                <div className='flex items-center'>
                   <Link href='/'>
                     <Image
                       src='/assets/logo.png'
                       alt='logo'
-                      width={100}
-                      height={100}
+                      width={75}
+                      height={50}
+                      className='cursor-pointer rounded-full'
                     />
                   </Link>
-                </div>
-
-                <div className='-mr-2'>
-                  <Popover.Button className='inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
-                    <span className='sr-only'>Close menu</span>
-                    <XMarkIcon className='h-6 w-6' aria-hidden='true' />
-                  </Popover.Button>
-                </div>
-              </div>
-              <div className='mt-4 '>
-                <label htmlFor='search' className='sr-only'>
-                  Search
-                </label>
-                <div className='relative'>
-                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                    <AiOutlineSearch
-                      className='h-5 w-5 text-gray-400'
-                      aria-hidden='true'
-                    />
+                  <div className='flex items-center cursor-pointer'>
+                    <Link href='/cart'>
+                      <AiOutlineShoppingCart className='text-2xl text-gray-700' />
+                      <span className='text-gray-700 font-semibold text-lg ml-2'>
+                        {cartItems.length}
+                      </span>
+                    </Link>
                   </div>
-                  <input
-                    id='search'
-                    name='search'
-                    className='block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-400 focus:outline-none focus:placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-                    placeholder='Search'
-                    type='search'
-                  />
+                </div>
+                <div
+                  onClick={handleNav}
+                  className='rounded-full shadow-lg shadow-gray-400 p-2 cursor-pointer'
+                >
+                  <XMarkIcon className='h-4 w-4 text-gray-500' />
                 </div>
               </div>
-              <div className='mt-6'>
-                <nav className='grid grid-cols-2 gap-y-8'>
-                  {categories.map((item) => (
-                    <span
-                      key={item.id}
-                      className='p-2 text-sm font-semibold  text-gray-900 hover:text-[#E43038]'
-                    >
-                      {item.name}
-                    </span>
-                  ))}
-                </nav>
+              <div className=' border-gray-300 my-4'>
+                <input
+                  type='text'
+                  placeholder='Search'
+                  className=' px-8  w-full border-none rounded-lg py-2 text-gray-700 focus:outline-none items-center '
+                />
               </div>
             </div>
-            <div className='space-y-6 py-6 px-5'>
-              <div>
-                <Link
-                  href='/register'
-                  className='flex w-full items-center justify-center rounded-md border border-transparent bg-[#E43038] px-4 py-2 text-base font-medium text-white shadow-sm '
-                >
-                  Sign up
-                </Link>
-                <p className='mt-6 text-center text-base font-medium text-gray-500'>
-                  <Link href='/login' className='text-[#E43038]'>
-                    Sign in
-                  </Link>
-                </p>
-              </div>
+            <div className='py-4 flex flex-col border-b'>
+              <h1 className='text-xl font-semibold'>Categories</h1>
+            </div>
+            <div className='grid grid-cols-2 gap-4 w-full'>
+              {categories.map((category) => (
+                <Disclosure as='div' key={category.id}>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className='flex items-center w-full py-2 text-gray-700 hover:text-[#E43038] focus:outline-none'>
+                        <span className='text-sm font-semibold'>
+                          {category.name}
+                        </span>
+                        <ChevronDownIcon
+                          className={`${
+                            open ? "transform rotate-180" : ""
+                          } w-5 h-5 text-gray-500`}
+                        />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className='p-2 text-md font-semibold grid grid-cols-2 gap-4  text-gray-500'>
+                        {category.dropdown.map((subCategory) => (
+                          <Link key={subCategory.id} href='#'>
+                            <p className='cursor-pointer  hover:text-[#E43038]'>
+                              {subCategory.name}
+                            </p>
+                          </Link>
+                        ))}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              ))}
+            </div>
+            <div className='flex mt-7 w-full items-center justify-between'>
+              {user ? (
+                <div className='flex flex-col  items-center ml-4'>
+                  <div className='flex items-center'>
+                    <AiOutlineUser className='text-2xl text-gray-700' />
+                    <span className='text-gray-700 font-semibold text-lg ml-2'>
+                      {user.displayName}
+                    </span>
+                  </div>
+                  <div className='flex items-center'>
+                    <button
+                      onClick={logoutUser}
+                      className='ml-4 text-gray-700 font-semibold text-lg'
+                    >
+                      Logout
+                    </button>
+                    <AiOutlineLogout className='text-2xl text-gray-700 ml-2' />
+                  </div>
+                </div>
+              ) : (
+                <div className='flex flex-col items-center  w-full ml-4'>
+                  <button className='flex w-full justify-center rounded-md border border-transparent bg-[#E43038] py-2 px-4 text-sm font-medium mt-4 text-white hover:bg-[#dd9194] focus:outline-none focus:ring-2 focus:ring-[#331416] focus:ring-offset-2'>
+                    <Link href='/login'>Login</Link>
+                  </button>
+                  <button className=' flex w-full justify-center rounded-md border border-transparent bg-[#E43038] py-2 px-4 text-sm font-medium mt-4 text-white hover:bg-[#dd9194] focus:outline-none focus:ring-2 focus:ring-[#331416] focus:ring-offset-2'>
+                    <Link href='/register'>Register</Link>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-        </Popover.Panel>
-      </Transition>
-    </Popover>
+        </div>
+      </div>
+    </Fragment>
   );
 };
 

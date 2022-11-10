@@ -16,7 +16,7 @@ const ProductDetails = ({ product }) => {
         <div className='lg:w-4/5 mx-auto flex flex-wrap'>
           <Image
             alt={product?.title}
-            className='lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded'
+            className='lg:w-1/2 w-full lg:h-auto  object-cover object-center rounded'
             src={product?.image}
             width={500}
             height={500}
@@ -44,7 +44,7 @@ const ProductDetails = ({ product }) => {
             </div>
             <p className='leading-relaxed'>{product?.description}</p>
 
-            <div className='flex'>
+            <div className='flex mt-4'>
               <span className='title-font font-medium text-2xl text-gray-900'>
                 ${product?.price}
               </span>
