@@ -20,7 +20,7 @@ const Footer = () => {
                   width={100}
                   height={50}
                   alt='logo'
-                  className='rounded-full border  p-1 '
+                  className='rounded-full '
                 />
               </div>
               <span className='ml-2 text-xl font-bold tracking-wide text-white  uppercase'>
