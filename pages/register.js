@@ -55,7 +55,7 @@ const Register = () => {
           <Image
             src='/assets/logo.png'
             alt='background'
-            className='mx-auto h-12 w-auto rounded-full'
+            className='mx-auto h-36 w-auto rounded-full'
             width={600}
             height={600}
           />
