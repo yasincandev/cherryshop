@@ -55,7 +55,7 @@ const Search = () => {
           {filteredProducts.map((product) => (
             <Link
               className='flex'
-              href={`/products/${product.slug}`}
+              href={`/detail/${product.id}`}
               key={product.id}
             >
               <p
