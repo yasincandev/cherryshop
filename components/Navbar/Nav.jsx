@@ -8,14 +8,9 @@ import {
   AiOutlineSearch,
 } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import {
-  logoutUserThunk,
-  selectUser,
-  selectStatus,
-  selectError,
-  trackAuthState,
-} from "../../store/reducers/authSlice";
+import { selectUser } from "../../store/reducers/authSlice";
 import { useState } from "react";
+import Search from "./Search";
 
 const Nav = () => {
   const cartItems = useSelector((state) => state.cart);
@@ -34,27 +29,8 @@ const Nav = () => {
         />
       </Link>
       <div className='hidden md:flex items-center'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          className='h-6 w-6 pt-0.5 text-[#E43038]'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={3}
-            d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-          />
-        </svg>
-        <input
-          className='px-8 ml-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none items-center '
-          type='text'
-          name='search'
-          id='search'
-          placeholder='Search...'
-        />
+        <AiOutlineSearch className='text-2xl text-[#E43038] cursor-pointer' />
+        <Search />
       </div>
       <div className=' hidden md:flex items-center'>
         <ul className='flex items-center gap-3'>

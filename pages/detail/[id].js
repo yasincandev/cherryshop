@@ -11,8 +11,6 @@ const ProductDetail = () => {
 
   const { data, error, isSuccess } = useGetProductQuery(id);
 
-  console.log(data);
-
   return (
     <main className='container mx-auto mt-[72px]'>
       <Head>

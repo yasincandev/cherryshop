@@ -26,7 +26,7 @@ const ResponsiveNavbar = () => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-  console.log(user);
+
   const dispatch = useDispatch();
 
   const logoutUser = () => {

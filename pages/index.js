@@ -48,13 +48,13 @@ export default function Home() {
           '
         />
       </Head>
-      <Brands />
-      <Slider />
+      <Brands loading={isLoading} />
+      <Slider loading={isLoading} />
       {isLoading || womenLoading ? (
         <Loading />
       ) : (
         <>
-          <BestSeller bestSellers={bestSellers} />
+          <BestSeller loading={isLoading} bestSellers={bestSellers} />
           <Collection womenProducts={womenProducts} />
         </>
       )}
