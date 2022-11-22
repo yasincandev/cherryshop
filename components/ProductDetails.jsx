@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/reducers/cartSlice';
 import { addToFavorite } from '../store/reducers/favoriteSlice';
 import ReactStars from 'react-rating-stars-component';
@@ -9,6 +9,7 @@ import { toastr } from 'react-redux-toastr';
 
 const ProductDetails = ({ product }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.auth);
 
   const rating = Math.round(product?.rating.rate);
 
@@ -18,8 +19,12 @@ const ProductDetails = ({ product }) => {
   };
 
   const addToFavoritesHandler = () => {
-    dispatch(addToFavorite(product));
-    toastr.success('Product added to favorites');
+    if (user) {
+      dispatch(addToFavorite(product));
+      toastr.success('Product added to favorites');
+    } else {
+      toastr.error('Please login to add product to favorites');
+    }
   };
   return (
     <div className="text-gray-600 body-font mb-10  w-full h-full">
