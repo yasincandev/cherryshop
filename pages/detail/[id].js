@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useGetProductQuery } from "../../store/services/productApi";
 import ProductDetails from "../../components/ProductDetails";
 
-const ProductDetail = () => {
+const ProductDetail = ({ products }) => {
   const router = useRouter();
 
   const { id } = router.query;

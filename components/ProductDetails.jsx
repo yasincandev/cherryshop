@@ -1,14 +1,20 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/reducers/cartSlice";
 import ReactStars from "react-rating-stars-component";
 import { AiOutlineHeart } from "react-icons/ai";
 
+import { toastr } from "react-redux-toastr";
+
 const ProductDetails = ({ product }) => {
   const dispatch = useDispatch();
-  //product rating fraction rounded to the nearest integer
+
   const rating = Math.round(product?.rating.rate);
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(product));
+    toastr.success("Product added to cart");
+  };
 
   return (
     <div className='text-gray-600 body-font mb-10  w-full h-full'>
@@ -49,7 +55,7 @@ const ProductDetails = ({ product }) => {
                 ${product?.price}
               </span>
               <button
-                onClick={() => dispatch(addToCart(product))}
+                onClick={addToCartHandler}
                 className='flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded'
               >
                 Add to Cart

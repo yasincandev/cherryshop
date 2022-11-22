@@ -1,14 +1,11 @@
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { toastr } from "react-redux-toastr";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineMinus, AiOutlineSelect } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
-import {
-  removeFromCart,
-  clearCart,
-  increaseQuantity,
-} from "../store/reducers/cartSlice";
+import { removeFromCart, increaseQuantity } from "../store/reducers/cartSlice";
+
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -19,11 +16,6 @@ const Cart = () => {
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
     toastr.success("Success", "Item removed from cart");
-  };
-
-  const handleClearCart = () => {
-    dispatch(clearCart());
-    toastr.success("Success", "Cart cleared");
   };
 
   //if user not logged in can't go to checkout page
@@ -56,6 +48,9 @@ const Cart = () => {
               <h3 className='font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center'>
                 Price
               </h3>
+              <h3 className='font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center'>
+                Delete
+              </h3>
             </div>
             {cartItems.map((item) => (
               <div
@@ -74,12 +69,9 @@ const Cart = () => {
                   </div>
                   <div className='flex flex-col justify-center ml-4 flex-grow'>
                     <span className='font-semibold text-sm'>
-                      {
-                        //when screen size is small it will show only 2 words
-                        item.title.length > 20
-                          ? item.title.substring(0, 10) + "..."
-                          : item.title
-                      }
+                      {item.title.length > 30
+                        ? item.title.substring(0, 20) + "..."
+                        : item.title}
                     </span>
                   </div>
                 </div>
@@ -91,7 +83,7 @@ const Cart = () => {
                         ? () => handleRemoveFromCart(item.id)
                         : () => dispatch(removeFromCart(item.id))
                     }
-                    className='cursor-pointer'
+                    className='cursor-pointer hover:text-[#E43038] '
                   />
 
                   <span className='text-gray-700 mx-2'>{item.quantity}</span>
@@ -100,7 +92,7 @@ const Cart = () => {
                       //quantity ++ when click on plus icon
                       () => dispatch(increaseQuantity(item.id))
                     }
-                    className='cursor-pointer'
+                    className='cursor-pointer hover:text-[#E43038] '
                   />
                 </div>
                 <span className='text-center w-1/5 font-semibold text-sm'>
@@ -108,7 +100,7 @@ const Cart = () => {
                 </span>
                 <BsTrash
                   onClick={() => handleRemoveFromCart(item.id)}
-                  className='text-2xl'
+                  className='text-center  w-1/5  font-semibold text-2xl hover:text-[#E43038] cursor-pointer'
                 />
               </div>
             ))}
@@ -117,13 +109,21 @@ const Cart = () => {
             <h1 className='font-semibold text-2xl border-b pb-8'>
               Order Summary
             </h1>
-            <div className='flex justify-between mt-10 mb-5'>
-              <span className='font-semibold text-sm uppercase'>
-                Items {totalQuantity}
-              </span>
-              <span className='font-semibold text-sm'>
-                ${totalAmount.toFixed(2)}
-              </span>
+            <div className='flex justify-between flex-col mt-10 mb-5'>
+              <div className='flex flex-col gap-7 mt-10 mb-5'>
+                <span className='font-semibold text-sm uppercase flex justify-between'>
+                  Total Items In Cart :
+                  <p className='text-red-500 font-bold text-lg'>
+                    {totalQuantity}
+                  </p>
+                </span>
+                <span className='font-semibold text-sm uppercase flex justify-between'>
+                  Total Price :
+                  <p className='text-red-500 font-bold text-lg'>
+                    $ {totalAmount}
+                  </p>
+                </span>
+              </div>
             </div>
             <button
               onClick={handleCheckout}

@@ -17,7 +17,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "./sync_storage";
 
 const rootReducer = combineReducers({
   [productApi.reducerPath]: productApi.reducer,

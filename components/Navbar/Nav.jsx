@@ -29,7 +29,6 @@ const Nav = () => {
         />
       </Link>
       <div className='hidden md:flex items-center'>
-        <AiOutlineSearch className='text-2xl text-[#E43038] cursor-pointer' />
         <Search />
       </div>
       <div className=' hidden md:flex items-center'>
