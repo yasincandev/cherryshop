@@ -1,78 +1,69 @@
-import Image from "next/image";
+import { useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { categories, brands } from "../../data";
-import { useGetProductsQuery } from "../../store/services/productApi";
-
-//create a search component which depends on the search query with product title. Show suggestions as the user types.
+import Router from "next/router";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const Search = () => {
-  const { isLoading, data } = useGetProductsQuery();
-  const [search, setSearch] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [title, setTitle] = useState("");
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    setShowSuggestions(true);
+  const initialValues = {
+    title: "",
   };
 
-  useEffect(() => {
-    if (search.length > 0) {
-      const results = data.filter((product) =>
-        product.title.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredProducts(results);
-    } else {
-      setFilteredProducts([]);
-    }
-  }, [data, search]);
+  const validationSchema = Yup.object({
+    title: Yup.string().required("Required"),
+  });
+
+  const onSubmit = (values) => {
+    setTitle(values.title);
+    Router.push(`/search/${values.title}`);
+  };
 
   return (
-    <div className='relative'>
-      <input
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      <Form className='flex flex-col gap-2 p-2 w-52  '>
+        <div className='flex flex-col gap-2 p-2 w-52 relative'>
+          <Field
+            type='text'
+            name='title'
+            placeholder='Search...'
+            className='border-b border-gray-300 bg-white h-10 px-5 pr-16  text-sm focus:outline-none'
+          />
+          <ErrorMessage name='title' component='div' className='text-red-500' />
+          <div className='absolute top-2 right-0 mt-2'>
+            <button className='text-gray-600 focus:outline-none'>
+              <AiOutlineSearch className='text-2xl text-[#E43038]' />
+            </button>
+          </div>
+        </div>
+      </Form>
+    </Formik>
+  );
+};
+
+/*  <input
         type='text'
         name='search'
         id='search'
         placeholder='Search...'
         className='px-8 ml-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none items-center'
-        value={search}
+        value={title}
         onChange={handleChange}
       />
-      {isLoading ? (
-        <div class='w-60 h-24 border-2 rounded-md mx-auto'>
-          <div class='flex animate-pulse flex-row items-center h-full justify-center space-x-5'>
-            <div class='w-36 bg-gray-300 h-6 rounded-md '></div>
-            <div class='w-24 bg-gray-300 h-6 rounded-md '></div>
-          </div>
-        </div>
-      ) : (
-        <div
-          className={`absolute z-50 top-12 left-0 w-full bg-white rounded-lg shadow-lg ${
-            showSuggestions && filteredProducts.length > 0 ? "block" : "hidden"
-          }`}
-        >
-          {filteredProducts.map((product) => (
-            <Link
-              className='flex'
-              href={`/detail/${product.id}`}
-              key={product.id}
-            >
-              <p
-                className='block px-4 py-2 text-gray-700 hover:bg-gray-200'
-                onClick={() => {
-                  setSearch("");
-                  setShowSuggestions(false);
-                }}
-              >
-                {product.title}
-              </p>
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
+      <button
+        type='submit'
+        className='absolute top-0 right-0 mt-2  text-gray-700 focus:outline-none'
+      >
+        <AiOutlineSearch className='text-2xl text-[#E43038]' />
+      </button>
+    </form>
   );
-};
+}; */
 
 export default Search;
